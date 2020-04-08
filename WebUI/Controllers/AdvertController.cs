@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -18,13 +19,15 @@ namespace WebUI.Controllers
 
         public IActionResult Index()
         {
-            var result = _advertService.GetAll();
-            if (result.Success)
+            var model = new AdvertListViewModel
             {
-                return Ok(result.Data);
-            }
+                Adverts = _advertService.GetList()
 
-            return BadRequest(result.Message);
+            };
+
+           
+            return View(model.Adverts.ToList());
+
         }
     }
 }

@@ -6,6 +6,7 @@ using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataTransferObjects;
 using Entities.Concrete;
 
 namespace Business.Concrete
@@ -24,10 +25,6 @@ namespace Business.Concrete
             return new SuccessDataResult<Advert>(_advertDal.Get(a => a.Id == advertId)); 
         }
 
-        public IDataResult<List<Advert>> GetAll()
-        {
-            return new SuccessDataResult<List<Advert>>(_advertDal.GetList().ToList());
-        }
 
         public IDataResult<List<Advert>> GetByRealEstate(int realEstateId)
         {
@@ -50,6 +47,73 @@ namespace Business.Concrete
         {
             _advertDal.Update(advert);
             return new SuccessResult(Messages.AdvertUpdated);
+        }
+
+        public List<AdvertForListDto> GetList()
+        {
+            var result = _advertDal.MapToAdvertForList();
+            var dto = MapToAdvertForListDto(result);
+            return (dto);
+        }
+
+        private List<AdvertForListDto> MapToAdvertForListDto(List<Advert> advert)
+        {
+            var returnedDto = new List<AdvertForListDto>(advert.Select(a => new AdvertForListDto
+            {
+                Id = a.Id,
+                RoomCount = a.RoomCount,
+                BuildAge = a.BuildAge,
+                BuildFloor = a.BuildFloor,
+                Floor = a.Floor,
+                SquareMeter = a.SquareMeter,
+                ListingDate = a.ListingDate,
+                Description = a.Description,
+                Title = a.Title,
+                Address = a.Address,
+                IsLive = a.IsLive,
+                Price = a.Price,
+                
+                
+                Province = new ProvinceDto
+                {
+                    Name = a.Province.Name
+                },
+                District = new DistrictDto
+                {
+                  
+                    Name = a.District.Name
+                },
+                Neighborhood = new NeighborhoodDto
+                {
+                   
+                    Name = a.Neighborhood.Name
+                },
+                RealEstate = new RealEstateDto
+                {
+                   
+                    CompanyName = a.RealEstate.CompanyName,
+                    UserName = a.RealEstate.UserName,
+                    Address = a.RealEstate.Address,
+                    Mail = a.RealEstate.Mail
+                    
+                },
+                AdvertType = new AdvertTypeDto
+                {
+                    Name = a.AdvertType.Name
+                },
+                Heating = new HeatingDto
+                {
+                    Name = a.Heating.Name
+                },
+                Photos = a.Photos.Select(ap => new PhotoDto
+                {
+                    Url = ap.Url,
+                    DateAdded = ap.DateAdded,
+                    IsMain = ap.IsMain
+                }).ToList()
+            }));
+
+            return returnedDto;
         }
     }
 }

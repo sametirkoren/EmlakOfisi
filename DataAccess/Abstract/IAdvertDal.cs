@@ -8,6 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface IAdvertDal : IEntityRepository<Advert>
     {
-
+        List<Advert> MapToAdvertForList();
     }
 }

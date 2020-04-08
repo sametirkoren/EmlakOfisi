@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Core.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Advert
+    public class Advert :IEntity
     {
         public Advert()
         {

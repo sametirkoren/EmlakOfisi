@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities.Concrete
 {
+    [Table("RealEstates")]
     public class RealEstate
     {
         public RealEstate()
         {
             Adverts = new List<Advert>();
         }
+        [Key]
+        [Column(Order=1)]
         public int Id { get; set; }
 
         public string CompanyName { get; set; }
@@ -24,15 +29,6 @@ namespace Entities.Concrete
         public string Mail { get; set; }
 
         public string Address { get; set; }
-
-        public int ProvinceId { get; set; }
-        public virtual Province Province { get; set; }
-
-        public int DistrictId { get; set; }
-        public virtual District District  { get; set; }
-
-        public int NeighborhoodId { get; set; }
-        public virtual Neighborhood Neighborhood { get; set; }
 
         public virtual ICollection<Advert> Adverts { get; set; }
     }

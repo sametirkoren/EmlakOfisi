@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities.Concrete
 {
+    [Table("Photos")]
     public class Photo
     {
+        [Key]
+        [Column(Order = 1)]
         public int Id { get; set; }
         public int AdvertId { get; set; }
+        [ForeignKey("AdvertId")]
         public string Url { get; set; }
 
         public DateTime DateAdded { get; set; }

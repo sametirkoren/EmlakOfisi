@@ -4,14 +4,16 @@ using DataAccess.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EmlakOfisiContext))]
-    partial class EmlakOfisiContextModelSnapshot : ModelSnapshot
+    [Migration("20200409143037_AddAdminMigration")]
+    partial class AddAdminMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,9 +82,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("NeighborhoodId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlaceId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -110,8 +109,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("HeatingId");
 
                     b.HasIndex("NeighborhoodId");
-
-                    b.HasIndex("PlaceId");
 
                     b.HasIndex("ProvinceId");
 
@@ -177,18 +174,15 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlaceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostCode")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PlaceId");
+                    b.HasIndex("DistrictId");
 
                     b.ToTable("Neighborhoods");
                 });
@@ -220,26 +214,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("AdvertId");
 
                     b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Place", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.ToTable("Places");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Province", b =>
@@ -315,12 +289,6 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Place", "Place")
-                        .WithMany("Adverts")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Entities.Concrete.Province", "Province")
                         .WithMany("Adverts")
                         .HasForeignKey("ProvinceId")
@@ -345,9 +313,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Neighborhood", b =>
                 {
-                    b.HasOne("Entities.Concrete.Place", "Place")
+                    b.HasOne("Entities.Concrete.District", "District")
                         .WithMany("Neighborhoods")
-                        .HasForeignKey("PlaceId")
+                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -357,15 +325,6 @@ namespace DataAccess.Migrations
                     b.HasOne("Entities.Concrete.Advert", "Advert")
                         .WithMany("Photos")
                         .HasForeignKey("AdvertId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Place", b =>
-                {
-                    b.HasOne("Entities.Concrete.District", "District")
-                        .WithMany("Places")
-                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

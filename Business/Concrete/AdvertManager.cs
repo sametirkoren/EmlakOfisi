@@ -83,10 +83,17 @@ namespace Business.Concrete
                   
                     Name = a.District.Name
                 },
+
+                Place = new PlaceDto
+                {
+                    Name = a.Place.Name
+                },
                 Neighborhood = new NeighborhoodDto
                 {
                    
-                    Name = a.Neighborhood.Name
+                    Name = a.Neighborhood.Name,
+                    PostCode = a.Neighborhood.PostCode
+                    
                 },
                 RealEstate = new RealEstateDto
                 {

@@ -17,7 +17,7 @@ namespace Entities.Concrete
 
         public District()
         {
-            Neighborhoods = new List<Neighborhood>();
+            Places = new List<Place>();
             Adverts = new List<Advert>();
         }
      
@@ -26,7 +26,7 @@ namespace Entities.Concrete
         public virtual Province Province { get; set; }
 
 
-        public virtual ICollection<Neighborhood> Neighborhoods { get; set; }
+        public virtual ICollection<Place> Places{ get; set; }
         public virtual ICollection<Advert> Adverts { get; set; }
 
     }

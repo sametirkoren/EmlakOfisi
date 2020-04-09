@@ -36,7 +36,8 @@ namespace DataTransferObjects
 
         public virtual DistrictDto District { get; set; }
 
-      
+
+        public virtual PlaceDto Place { get; set; }
         public virtual NeighborhoodDto Neighborhood { get; set; }
 
         
@@ -83,10 +84,15 @@ namespace DataTransferObjects
 
 
     }
+    public class PlaceDto
+    {
+        public string Name { get; set; }
+    }
 
     public class NeighborhoodDto
     {
         public string Name { get; set; }
+        public int PostCode { get; set; }
     }
 
     public class HeatingDto

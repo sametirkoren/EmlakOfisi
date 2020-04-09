@@ -14,7 +14,13 @@ namespace Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AdvertManager>().As<IAdvertService>();
-            builder.RegisterType<EfAdvertDal>().As<IAdvertDal>();
+            builder.RegisterType<EfAdvertDal>().As<IAdvertDal>(); 
+            
+            builder.RegisterType<AdminManager>().As<IAdminService>();
+            builder.RegisterType<EfAdminDal>().As<IAdminDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+       
         }
     }
 }

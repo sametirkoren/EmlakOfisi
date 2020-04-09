@@ -18,9 +18,11 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<AdvertType> AdvertTypes { get; set; }
         public DbSet<District> Districts { get; set; }
+        public DbSet<Admin> Admins{ get; set; }
         public DbSet<Heating> Heatings { get; set; }
         public DbSet<Neighborhood> Neighborhoods { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Place> Places{ get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
 
@@ -37,6 +39,12 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
                 .HasOne<District>(a => a.District)
                 .WithMany(d => d.Adverts)
                 .HasForeignKey(a => a.DistrictId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Advert>()
+                .HasOne<Place>(a => a.Place)
+                .WithMany(p => p.Adverts)
+                .HasForeignKey(a => a.PlaceId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Advert>()

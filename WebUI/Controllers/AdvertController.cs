@@ -25,8 +25,7 @@ namespace WebUI.Controllers
 
             };
 
-           
-            return View(model.Adverts.ToList());
+            return View(model.Adverts);
 
         }
     }

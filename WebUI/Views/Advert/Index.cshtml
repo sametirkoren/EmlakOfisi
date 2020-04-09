@@ -21,6 +21,7 @@
             <th>m²</th>
             <th>İl</th>
             <th>İlçe</th>
+            <th>Semt</th>
             <th>Mahalle</th>
             <th>Emlakçı Bilgi</th>
         </tr>
@@ -54,9 +55,13 @@
             </td>
             <td>
                 @item.District.Name
+            </td> 
+            <td>
+                @item.Place.Name
             </td>
             <td>
                 @item.Neighborhood.Name
+                @item.Neighborhood.PostCode
             </td>
             <td>
                 @item.RealEstate.CompanyName

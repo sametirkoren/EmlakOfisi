@@ -38,9 +38,14 @@ namespace Entities.Concrete
 
         public virtual Province Province { get; set; }
 
+
         public int DistrictId { get; set; }
 
         public virtual District District { get; set; }
+
+        public int PlaceId { get; set; }
+
+        public virtual Place Place{ get; set; }
 
         public int NeighborhoodId { get; set; }
         public virtual Neighborhood Neighborhood { get; set; }

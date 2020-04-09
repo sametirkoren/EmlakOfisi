@@ -7,25 +7,26 @@ using Core.Entities.Abstract;
 
 namespace Entities.Concrete
 {
-    [Table("Provinces")]
-    public class Province : IEntity
+    public class Place : IEntity
     {
         [Key]
         [Column(Order = 1)]
         public int Id { get; set; }
+
         public string Name { get; set; }
 
-        public Province()
+        
+        public Place()
         {
-            Districts = new List<District>();
+            Neighborhoods = new List<Neighborhood>();
             Adverts = new List<Advert>();
         }
 
+        public int DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public virtual District District { get; set; }
 
         public virtual ICollection<Advert> Adverts { get; set; }
-        public virtual ICollection<District> Districts { get; set; }
-
-       
-        
+        public virtual ICollection<Neighborhood> Neighborhoods { get; set; }
     }
 }

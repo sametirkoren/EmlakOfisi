@@ -9,8 +9,11 @@ namespace Business.Abstract
 {
     public interface IRealEstateService
     {
+
         IDataResult<RealEstate> GetById(int realEstateId);
-        IDataResult<List<RealEstate>> GetByAdvert(int advertId);
+       /* IDataResult<List<RealEstate>> GetByAdvert(int advertId);*/
+
+        List<RealEstate> GetList();
 
         IResult Add(RealEstate realEstate);
 
@@ -18,6 +21,8 @@ namespace Business.Abstract
 
         IResult Update(RealEstate realEstate);
 
-      
+        RealEstate GetByUsername(string username);
+
+
     }
 }

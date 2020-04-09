@@ -12,6 +12,10 @@ namespace Business.Abstract
         IDataResult<Admin> Register(RegisterDto registerDto);
         IDataResult<Admin> Login(LoginDto loginDto);
 
-        IResult Exists(string username);
+        IDataResult<RealEstate> RegisterRealEstate(RegisterDto registerDto);
+        IDataResult<RealEstate> LoginRealEstate(LoginDto loginDto);
+
+        IResult AdminExists(string username);
+        IResult RealEstateExists(string username);
     }
 }

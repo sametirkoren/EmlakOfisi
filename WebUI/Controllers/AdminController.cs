@@ -49,7 +49,7 @@ namespace WebUI.Controllers
 
         public IActionResult Register(RegisterDto registerDto)
         {
-            var exist = _authService.Exists(registerDto.UserName);
+            var exist = _authService.AdminExists(registerDto.UserName);
             if (!exist.Success)
             {
                 ViewBag.AlreadyUsername = exist.Message;

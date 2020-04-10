@@ -34,5 +34,8 @@ namespace Entities.Concrete
         public string Address { get; set; }
 
         public virtual ICollection<Advert> Adverts { get; set; }
+
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

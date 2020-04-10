@@ -17,5 +17,7 @@ namespace Business.Abstract
 
         IResult AdminExists(string username);
         IResult RealEstateExists(string username);
+
+        
     }
 }

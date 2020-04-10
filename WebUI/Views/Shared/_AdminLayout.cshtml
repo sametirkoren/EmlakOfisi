@@ -31,51 +31,73 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+
 </head>
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/Admin/">Emlak Ofisi Admin</a>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/Admin/">Emlak Ofisi Admin</a>
 
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/Admin/Logout/">Çıkış Yap</a>
-            </li>
-        </ul>
-    </nav>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/Admin/Logout/">Çıkış Yap</a>
+        </li>
+    </ul>
+</nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/Admin/Index">
-                                <span data-feather="home"></span>
-                                Anasayfa <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Calisan/Index">
-                                <span data-feather="users"></span>
-                                Çalışan
-                            </a>
-                        </li>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Admin/Index">
+                            <span data-feather="home"></span>
+                            Anasayfa <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
 
 
-                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/RealEstate/Index">
+                            <span data-feather="users"></span>
+                            Emlakçı
+                        </a>
+                    </li>
 
 
+                </ul>
+
+
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            @if (TempData["DangerMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["DangerMessage"]
                 </div>
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-              
-                @RenderBody()
-            </main>
+            }
+            @if (TempData["WarningMessage"] != null)
+            {
+                <div class="alert alert-warning">
+                    @TempData["WarningMessage"]
+                </div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+            @RenderBody()
+        </main>
 
-        </div>
     </div>
+</div>
 
 </body>
+
+
 </html>

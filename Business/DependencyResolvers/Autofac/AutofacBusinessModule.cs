@@ -23,6 +23,15 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AdvertManager>().As<IAdvertService>();
             builder.RegisterType<EfAdvertDal>().As<IAdvertDal>();
 
+            builder.RegisterType<ProvinceManager>().As<IProvinceService>();
+            builder.RegisterType<EfProvinceDal>().As<IProvinceDal>();
+
+
+            builder.RegisterType<AdvertTypeManager>().As<IAdvertTypeService>();
+            builder.RegisterType<EfAdvertTypeDal>().As<IAdvertTypeDal>();
+
+            builder.RegisterType<HeatingManager>().As<IHeatingService>();
+            builder.RegisterType<EfHeatingDal>().As<IHeatingDal>();
 
 
             builder.RegisterType<AdminManager>().As<IAdminService>();

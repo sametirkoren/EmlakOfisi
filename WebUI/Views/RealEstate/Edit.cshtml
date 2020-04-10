@@ -1,0 +1,54 @@
+﻿@model Entities.Concrete.RealEstate
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<h2>Emlakçı Düzenle</h2>
+
+<div class="form">
+    <form class="form-validate form-horizontal" id="feedback_form" method="post" action="/RealEstate/Edit/" enctype="multipart/form-data">
+        <div class="form-group">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m=>m.PasswordSalt)
+            @Html.HiddenFor(m=>m.PasswordHash)
+
+            <label for="CompanyName" class="control-label col-lg-2">Firma Adı <span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="CompanyName" name="CompanyName" type="text" required value="@Model.CompanyName" />
+            </div>
+            <label for="UserName" class="control-label col-lg-2">Kullanıcı Adı<span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="UserName" name="UserName" type="text" required value="@Model.UserName" />
+            </div>
+            <label for="Mail" class="control-label col-lg-2">Mail Adresi <span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="Mail" name="Mail" type="text" required value="@Model.Mail" />
+            </div>
+
+            <label for="Address" class="control-label col-lg-2">Adres Bilgileri <span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="Address" name="Address" type="text" required value="@Model.Address" />
+            </div>
+
+            <label for="Password" class="control-label col-lg-2">Şifre <span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="Password" name="Password" type="password" required value="@Model.Password" />
+            </div>
+
+
+        </div>
+   
+
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button class="btn btn-primary" type="submit">Düzenle</button>
+                <button class="btn btn-default" type="button"><a href="/RealEstate/Index">İptal</a></button>
+            </div>
+        </div>
+    </form>
+</div>
+

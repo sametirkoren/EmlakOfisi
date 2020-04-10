@@ -1,6 +1,8 @@
 ﻿using Core.Entities.Abstract;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities.Concrete
@@ -63,6 +65,9 @@ namespace Entities.Concrete
         public virtual Heating Heating { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; }
+
+        [NotMapped]
+        public IFormFile[] Files { get; set; }  
 
 
 

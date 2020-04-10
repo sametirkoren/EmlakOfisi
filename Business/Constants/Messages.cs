@@ -25,5 +25,13 @@ namespace Business.Constants
         public static string RealEstateAdded = "Emlakçı başarıyla eklendi.";
         public static string RealEstateDeleted = "Emlakçı başarıyla silindi.";
         public static string RealEstateUpdated = "Emlakçı başarıyla güncellendi.";
+
+        public static string AdvertTypeAdded = "İlan tipi başarıyla eklendi.";
+        public static string AdvertTypeDeleted = "İlan tipi başarıyla silindi.";
+        public static string AdvertTypeUpdated = "İlan tipi başarıyla güncellendi.";
+
+        public static string HeatingAdded = "Isıtma tipi başarıyla eklendi.";
+        public static string HeatingDeleted = "Isıtma tipi başarıyla silindi.";
+        public static string HeatingUpdated = "Isıtma tipi başarıyla güncellendi.";
     }
 }

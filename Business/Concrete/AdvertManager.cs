@@ -114,8 +114,7 @@ namespace Business.Concrete
                 },
                 Photos = a.Photos.Select(ap => new PhotoDto
                 {
-                    Url = ap.Url,
-                    DateAdded = ap.DateAdded,
+                    FileName = ap.FileName,
                     IsMain = ap.IsMain
                 }).ToList()
             }));

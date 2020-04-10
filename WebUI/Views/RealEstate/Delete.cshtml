@@ -1,0 +1,16 @@
+﻿@model Entities.Concrete.RealEstate
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>
+    <b>@Model.UserName </b> Kullanıcı Adına Sahip Emlakçıyı Silmek İstiyor Musunuz ?
+</h2>
+
+<form asp-controller="RealEstate" asp-action="Delete" method="post">
+    @Html.HiddenFor(m=>m.Id)
+
+    <button type="submit" class="btn btn-primary">Sil</button>
+</form>
+

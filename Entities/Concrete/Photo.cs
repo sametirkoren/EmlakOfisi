@@ -15,13 +15,10 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int AdvertId { get; set; }
         [ForeignKey("AdvertId")]
-        public string Url { get; set; }
-
-        public DateTime DateAdded { get; set; }
+        public string FileName { get; set; }
 
         public bool IsMain { get; set; }
 
-        public string PublicId { get; set; }
 
         public Advert Advert { get; set; }
     }

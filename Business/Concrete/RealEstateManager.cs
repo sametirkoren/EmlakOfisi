@@ -19,6 +19,7 @@ namespace Business.Concrete
             _realEstateDal = realEstateDal;
         }
 
+       
         public List<RealEstate> GetList()
         {
             return _realEstateDal.GetList().ToList();

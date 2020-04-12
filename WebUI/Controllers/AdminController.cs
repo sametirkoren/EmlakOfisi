@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Utilities.Security;
 using DataTransferObjects;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Models;
 
@@ -78,6 +80,78 @@ namespace WebUI.Controllers
             return RedirectToAction("Login", "Admin");
 
         }
+
+        
+        public IActionResult List()
+        {
+            return View(_adminService.GetList());
+        }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var admin = _adminService.GetById(id);
+            return View(admin.Data);
+        }
+
+        [HttpPost]
+        // TODO : Bu kısıma bakılacak update işlmei sırasında aynı Username girildiğinde else düşme durumu
+        public IActionResult Edit(Admin admin, string password)
+        {
+            var adminUsername = admin.UserName;
+            var adminIsAlready = _authService.AdminExists(adminUsername);
+
+            var passwordHash = admin.PasswordHash;
+            var passwordSalt = admin.PasswordSalt;
+
+            if (adminIsAlready.Success)
+            {
+                if (ModelState.IsValid)
+                {
+                    HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                    var adminUpdated = new Admin
+                    {
+                        Id = admin.Id,
+                        UserName = admin.UserName,
+                        PasswordHash = passwordHash,
+                        PasswordSalt = passwordSalt
+                    };
+                    var adminUpdate = _adminService.Update(adminUpdated);
+                    TempData["WarningMessage"] = adminUpdate.Message;
+                    return RedirectToAction("List", "Admin");
+                }
+            }
+            else
+            {
+                TempData["DangerMessage"] = adminIsAlready.Message;
+
+            }
+
+            return View(admin);
+
+
+        }
+
+
+        [HttpGet]
+
+        public IActionResult Delete(int id)
+        {
+            var admin = _adminService.GetById(id);
+            return View(admin.Data);
+        }
+
+        [HttpPost, ActionName("Delete")]
+
+        public IActionResult DeleteConfirm(Admin admin)
+        {
+            var adminDelete = _adminService.Delete(admin);
+            TempData["DangerMessage"] = adminDelete.Message;
+            return RedirectToAction("List", "Admin");
+        }
+
+
 
     }
 

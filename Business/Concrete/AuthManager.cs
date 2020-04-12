@@ -107,6 +107,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-     
+       
     }
 }

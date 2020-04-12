@@ -22,12 +22,13 @@ namespace WebUI.Controllers
             _realEstateService = realEstateService;
         }
 
-    
         public IActionResult Index()
         {
 
             return View(_realEstateService.GetList().ToList());
         }
+
+        
 
      
         [HttpGet]

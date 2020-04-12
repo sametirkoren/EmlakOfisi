@@ -11,8 +11,7 @@ namespace Business.Abstract
     {
 
         IDataResult<RealEstate> GetById(int realEstateId);
-       /* IDataResult<List<RealEstate>> GetByAdvert(int advertId);*/
-
+        /* IDataResult<List<RealEstate>> GetByAdvert(int advertId);*/
         List<RealEstate> GetList();
 
         IResult Add(RealEstate realEstate);

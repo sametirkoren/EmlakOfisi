@@ -41,5 +41,11 @@ namespace Business.Concrete
             _advertTypeDal.Update(advertType);
             return new SuccessResult(Messages.AdvertTypeUpdated);
         }
+
+        public IDataResult<AdvertType> GetById(int advertTypeId)
+        {
+
+            return new SuccessDataResult<AdvertType>(_advertTypeDal.Get(a => a.Id == advertTypeId));
+        }
     }
 }

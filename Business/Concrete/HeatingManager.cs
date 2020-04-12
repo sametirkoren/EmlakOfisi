@@ -19,6 +19,11 @@ namespace Business.Concrete
             _heatingDal = heatingDal;
         }
 
+        public IDataResult<Heating> GetById(int heatingId)
+        {
+            return new SuccessDataResult<Heating>(_heatingDal.Get(h => h.Id == heatingId));
+        }
+
         public IResult Add(Heating heating)
         {
             _heatingDal.Add(heating);

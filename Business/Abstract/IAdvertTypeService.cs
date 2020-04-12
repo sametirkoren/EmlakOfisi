@@ -8,6 +8,7 @@ namespace Business.Abstract
 {
     public interface IAdvertTypeService
     {
+        IDataResult<AdvertType> GetById(int advertTypeId);
         IResult Add(AdvertType advertType);
 
         IResult Delete(AdvertType advertType);

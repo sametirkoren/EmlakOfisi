@@ -1,0 +1,15 @@
+﻿@model Entities.Concrete.Heating
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>
+    <b>@Model.Name </b> İsimli Isınma Tipini Silmek İstiyor Musunuz ?
+</h2>
+
+<form asp-controller="Heating" asp-action="Delete" method="post">
+    @Html.HiddenFor(m => m.Id)
+
+    <button type="submit" class="btn btn-primary">Sil</button>
+</form>

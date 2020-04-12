@@ -8,6 +8,7 @@ namespace Business.Abstract
 {
     public interface IHeatingService
     {
+        IDataResult<Heating> GetById(int heatingId);
         IResult Add(Heating heating);
 
         IResult Delete(Heating heating);

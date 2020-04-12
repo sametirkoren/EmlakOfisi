@@ -1,0 +1,35 @@
+﻿@model Entities.Concrete.AdvertType
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<h2>İlan Türü Düzenle</h2>
+
+<div class="form">
+    <form class="form-validate form-horizontal" id="feedback_form" method="post" action="/AdvertType/Edit/" enctype="multipart/form-data">
+        <div class="form-group">
+            @Html.HiddenFor(m => m.Id)
+      
+
+            <label for="Name" class="control-label col-lg-2">İlan Türü Adı <span class="required">*</span></label>
+            <div class="col-lg-10">
+                <input class="form-control" id="Name" name="Name" type="text" required value="@Model.Name" />
+            </div>
+        
+
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button class="btn btn-primary" type="submit">Düzenle</button>
+                <button class="btn btn-default" type="button"><a href="/AdvertType/Index">İptal</a></button>
+            </div>
+        </div>
+    </form>
+</div>
+

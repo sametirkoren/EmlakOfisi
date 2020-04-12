@@ -4,28 +4,48 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<header role="banner">
-</header>
 
-<div class="container-fluid">
+<div style="margin-top: 10px;">
     <div class="row">
-        <div class="card-deck">
-            <div class="card">
-                <img class="card-img-top" src="https://i.hizliresim.com/AOaNNp.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title text-center">Toplam Çalışan Sayısı</h4>
-                    <button class="btn btn-dark btn-lg btn-block"></button>
+        <div class="col-md-6 col-sm-6 col-xs-12 mb-10">
+            <figure>
+                <img class="img-fluid" src="~/staticImages/local-seo-real-estate-agent.jpg" alt="Card image cap">
+            </figure>
+            <div class="card-block">
+                <h4 class="card-title text-center">Toplam Emlakçı Sayısı</h4>
+                <button style="margin-bottom:10px" class="btn btn-dark btn-lg btn-block">@ViewBag.RealEstateListCount</button>
 
-                </div>
             </div>
-            <div class="card">
-                <img class="card-img-top" src="https://i.hizliresim.com/zGXLOD.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title text-center">Toplam Departman Sayısı</h4>
-                    <button class="btn btn-dark btn-lg btn-block"></button>
-                </div>
-            </div>
-
         </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 mb-10">
+            <figure>
+                <img class="img-fluid" src="~/staticImages/real-estate-social-media-marketing.jpg" alt="Card image cap">
+            </figure>
+            <div class="card-block">
+                <h4 class="card-title text-center">Toplam İlan Sayısı</h4>
+                <button style="margin-bottom:10px" class="btn btn-dark btn-lg btn-block">@ViewBag.AdvertListCount</button>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 mb-10">
+            <figure>
+                <img class="img-fluid"  src="~/staticImages/ilanturu1-page-001.jpg" alt="Card image cap">
+
+            </figure>
+            <div class="card-block">
+                <h4 class="card-title text-center">Toplam İlan Türü Sayısı</h4>
+                <button style="margin-bottom:10px" class="btn btn-dark btn-lg btn-block">@ViewBag.AdvertTypeListCount</button>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 mb-10">
+            <figure>
+                <img class="img-fluid" src="~/staticImages/Natural-gas-heating-fire-flame-close-up_2560x1440.jpg" alt="Card image cap" />
+                
+            </figure>
+            <div class="card-block">
+                <h4 class="card-title text-center">Toplam Isınma Tipi Sayısı</h4>
+                <button style="margin-bottom:10px" class="btn btn-dark btn-lg btn-block">@ViewBag.HeatingListCount</button>
+            </div>
+        </div>
+
     </div>
 </div>

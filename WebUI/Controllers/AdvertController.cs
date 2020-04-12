@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using WebUI.Models;
 
 namespace WebUI.Controllers
@@ -20,15 +22,20 @@ namespace WebUI.Controllers
         private IHeatingService _heatingService;
         private IAdvertTypeService _advertTypeService;
         private IRealEstateService _realEstateService;
+        private INeighborhoodService _neighborhoodService;
+        private IPlaceService _placeService;
+        private IDistrictService _districtService;
 
-        public AdvertController(IAdvertService advertService, IWebHostEnvironment hostEnvironment, IProvinceService provinceService, IAdvertTypeService advertTypeService, IHeatingService heatingService)
+        public AdvertController(IAdvertService advertService, IWebHostEnvironment hostEnvironment, IProvinceService provinceService, IAdvertTypeService advertTypeService, IHeatingService heatingService, INeighborhoodService neighborhoodService, IDistrictService districtService, IPlaceService placeService)
         {
             _advertService = advertService;
             _hostEnvironment = hostEnvironment;
             _provinceService = provinceService;
             _advertTypeService = advertTypeService;
             _heatingService = heatingService;
-
+            _neighborhoodService = neighborhoodService;
+            _districtService = districtService;
+            _placeService = placeService;
         }
 
         public IActionResult Index()
@@ -42,16 +49,37 @@ namespace WebUI.Controllers
             return View(model.Adverts);
 
         }
-
-        public IActionResult Create(int id )
+      
+      
+        public JsonResult GetDistrictById(int id)
         {
-            ViewBag.ProvinceList = _provinceService.GetList();
-            ViewBag.HeatingList = _heatingService.GetList();
-            ViewBag.AdvertTypeList = _advertTypeService.GetList();
+            var districtList = _districtService.GetDistrict(id);
+            return Json(new SelectList(districtList, "Id", "Name"));
+        }
 
-            var realEstate = _realEstateService.GetById(id);
 
-            return View(realEstate.Data.ToString());
+        public JsonResult GetPlaceGetById(int id)
+        {
+            var placeList = _placeService.GetPlace(id);
+            return Json(new SelectList(placeList, "Id", "Name"));
+        }
+
+        public JsonResult GetNeighborhoodById(int id)
+        {
+            var neighborHoodList = _neighborhoodService.GetNeighborhood(id);
+            return Json(new SelectList(neighborHoodList, "Id", "Name"));
+        }
+
+
+
+        public IActionResult Create()
+        {
+
+                ViewBag.ProvinceList = _provinceService.GetList();
+                ViewBag.HeatingList = _heatingService.GetList();
+                ViewBag.AdvertTypeList = _advertTypeService.GetList();
+
+            return View();
         }
 
         [HttpPost]

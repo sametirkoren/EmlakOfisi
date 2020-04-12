@@ -8,10 +8,13 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 {
     public class EmlakOfisiContext:DbContext
     {
+       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.;initial catalog=EmlakOfisi;integrated security=true;");
-            
+           
+
+
         }
 
 

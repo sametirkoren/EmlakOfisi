@@ -26,6 +26,8 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
            
+            services.AddMvc();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
         }
 

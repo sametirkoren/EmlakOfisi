@@ -6,6 +6,7 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -25,6 +26,20 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<ProvinceManager>().As<IProvinceService>();
             builder.RegisterType<EfProvinceDal>().As<IProvinceDal>();
+
+
+
+            builder.RegisterType<PlaceManager>().As<IPlaceService>();
+            builder.RegisterType<EfPlaceDal>().As<IPlaceDal>();
+
+            builder.RegisterType<NeighborhoodManager>().As<INeighborhoodService>();
+            builder.RegisterType<EfNeighborhoodDal>().As<INeighborhoodDal>();
+
+            builder.RegisterType<DistrictManager>().As<IDistrictService>();
+            builder.RegisterType<EfDistrictDal>().As<IDistrictDal>();
+
+            builder.RegisterType<PlaceManager>().As<IPlaceService>();
+            builder.RegisterType<EfPlaceDal>().As<IPlaceDal>();
 
 
             builder.RegisterType<AdvertTypeManager>().As<IAdvertTypeService>();

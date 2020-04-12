@@ -20,6 +20,6 @@ namespace Entities.Concrete
         public bool IsMain { get; set; }
 
 
-        public Advert Advert { get; set; }
+        public virtual Advert Advert { get; set; }
     }
 }

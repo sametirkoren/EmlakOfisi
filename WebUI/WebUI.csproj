@@ -18,6 +18,10 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Advert\" />
+  </ItemGroup>
+
 
 
 </Project>

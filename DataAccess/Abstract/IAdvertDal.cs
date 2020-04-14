@@ -9,5 +9,10 @@ namespace DataAccess.Abstract
     public interface IAdvertDal : IEntityRepository<Advert>
     {
         List<Advert> MapToAdvertForList();
+
+        Advert MapToAdvert(int id);
+
+        Advert AdvertToPhoto(int id);
+
     }
 }

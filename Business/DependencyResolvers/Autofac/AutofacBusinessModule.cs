@@ -42,6 +42,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfPlaceDal>().As<IPlaceDal>();
 
 
+            builder.RegisterType<PhotoManager>().As<IPhotoService>();
+            builder.RegisterType<EfPhotoDal>().As<IPhotoDal>();
+
+
             builder.RegisterType<AdvertTypeManager>().As<IAdvertTypeService>();
             builder.RegisterType<EfAdvertTypeDal>().As<IAdvertTypeDal>();
 

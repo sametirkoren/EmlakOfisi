@@ -30,7 +30,12 @@ namespace DataTransferObjects
 
         public string Address { get; set; }
 
-
+        public int ProvinceId { get; set; }
+        public int PlaceId { get; set; }
+        public int DistrictId { get; set; }
+        public int NeighborhoodId { get; set; }
+        public int HeatingId { get; set; }
+        public int AdvertTypeId{ get; set; }
         public virtual ProvinceDto Province { get; set; }
 
 
@@ -40,8 +45,8 @@ namespace DataTransferObjects
         public virtual PlaceDto Place { get; set; }
         public virtual NeighborhoodDto Neighborhood { get; set; }
 
-        
 
+        public int RealEstateId { get; set; }
         public virtual RealEstateDto RealEstate { get; set; }
 
         
@@ -60,6 +65,7 @@ namespace DataTransferObjects
 
     public class RealEstateDto
     {
+        public int Id { get; set; }
         public string CompanyName { get; set; }
 
         public string UserName { get; set; }
@@ -71,11 +77,14 @@ namespace DataTransferObjects
 
     public class ProvinceDto
     {
+        
         public string Name { get; set; }
     }
 
     public class PhotoDto
     {
+        public int AdvertId { get; set; }
+        public int Id { get; set; }
         public string FileName { get; set; }
         public bool IsMain { get; set; }
 

@@ -1,0 +1,217 @@
+﻿@using Entities.Concrete
+@model RealEstate
+
+@{
+    Layout = "_RealEstateLayout";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Emlakçı İlan Girişi</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["DangerMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["DangerMessage"]
+    </div>
+}
+@if (TempData["WarningMessage"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["WarningMessage"]
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<!--/ bradcam_area  -->
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h3 class="mb-30">İlan Bilgileri</h3>
+                    <form action="/RealEstate/AdvertAdd" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="RealEstateId" value="@Model.Id">
+                        <div class="mt-10">
+                            <input type="text" name="Title" placeholder="İlan Başlığı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'İlan Başlığı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="text" name="Description" placeholder="İlan Açıklama" onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'İlan Açıklama'" required class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="BuildAge" placeholder="Bina Yaşı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bina Yaşı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="BuildFloor" placeholder="Bina Kat Sayısı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bina Kat Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="Floor" placeholder="Kat Sayısı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kat Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="RoomCount" placeholder="Oda Sayısı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Oda Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="SquareMeter" placeholder="Metre Kare(m²)"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Metre Kare(m²)'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" step="any" name="Price" placeholder="Fiyat"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fiyat'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="text" name="Address" placeholder="Adres Bilgileri" onfocus="this.placeholder = 'Adres Bilgileri'"
+                                   onblur="this.placeholder = 'Adres Bilgileri'" required class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <div class="form-group" id="default-select">
+                                <select class="form-control" name="AdvertTypeId">
+                                    <option>İlan Türü Seçiniz</option>
+                                    @foreach (AdvertType advertType in ViewBag.AdvertTypeList)
+                                    {
+
+
+                                        <option value="@advertType.Id">@advertType.Name</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <div class="form-group" id="default-select">
+                                <select class="form-control" name="HeatingId">
+                                    <option>Isınma Tipini Seçiniz</option>
+                                    @foreach (Heating heating in ViewBag.HeatingList)
+                                    {
+                                        <option value="@heating.Id">@heating.Name</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ProvinceId"></label>
+                            <select class="form-control" id="ProvinceId" name="ProvinceId" asp-items='@(new SelectList(ViewBag.ProvinceList, "Id", "Name"))'>
+                                <option>-- İl Seçiniz -- </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="DistrictId" name="DistrictId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- İlçe Seçiniz -- </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="PlaceId" name="PlaceId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- Semt Seçiniz -- </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="NeighborhoodId" name="NeighborhoodId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- Mahalle Seçiniz -- </option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="Files" class="control-label"></label>
+                            <input name="Files" type="file" multiple class="form-control-file" />
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">İlan Ver</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+        $(function () {
+            $("#ProvinceId").change(function() {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetDistrictById";
+            var ddlsource = "#ProvinceId";;
+
+            debugger;
+            $.getJSON(url,
+                { id: $(ddlsource).val() },
+                function(data) {
+                    var items = '';
+                    $("#DistrictId").empty();
+                    $.each(data,
+                        function(i, row) {
+                            items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                        });
+                    $("#DistrictId").html(items);
+                })
+        });
+        $("#DistrictId").change(function() {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetPlaceGetById";
+            var ddlsource = "#DistrictId";;
+            debugger;
+            $.getJSON(url,
+                { id: $(ddlsource).val() },
+                function(data) {
+                    var items = '';
+                    $("#PlaceId").empty();
+                    $.each(data,
+                        function(i, row) {
+                            items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                        });
+                    $("#PlaceId").html(items);
+                })
+        });
+        $("#PlaceId").change(function () {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetNeighborhoodById";
+            var ddlsource = "#PlaceId";
+            ;
+            debugger;
+            $.getJSON(url, { id: $(ddlsource).val() }, function(data) {
+                var items = '';
+                $("#NeighborhoodId").empty();
+                $.each(data,
+                    function(i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                $("#NeighborhoodId").html(items);
+            })
+        })
+    })
+</script>
+

@@ -1,0 +1,220 @@
+﻿@using Entities.Concrete
+@model Advert
+@{
+    ViewData["Title"] = "AdvertEdit";
+    Layout = "~/Views/Shared/_RealEstateLayout.cshtml";
+}
+
+@{
+    Layout = "_RealEstateLayout";
+}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Emlakçı İlan Düzenleme</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--/ bradcam_area  -->
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h3 class="mb-30">İlan Bilgileri</h3>
+                    <form action="/RealEstate/AdvertEdit" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.Id)
+                        <input type="hidden" name="Id" value="@Model.Id">
+                        <div class="mt-10">
+                            <input type="text" value="@Model.Title" name="Title" placeholder="İlan Başlığı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'İlan Başlığı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="text" value="@Model.Description" name="Description" placeholder="İlan Açıklama" onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'İlan Açıklama'" required class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="BuildAge" placeholder="Bina Yaşı" value="@Model.BuildAge"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bina Yaşı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="BuildFloor" placeholder="Bina Kat Sayısı" value="@Model.BuildFloor"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bina Kat Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="Floor" placeholder="Kat Sayısı" value="@Model.Floor"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kat Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="RoomCount" placeholder="Oda Sayısı" value="@Model.RoomCount"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Oda Sayısı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="SquareMeter" placeholder="Metre Kare(m²)" value="@Model.SquareMeter"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Metre Kare(m²)'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" step="any" name="Price" placeholder="Fiyat" value="@Model.Price"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fiyat'" required
+                                   class="single-input">
+                        </div> <div class="mt-10">
+                            <input type="text" name="Address" placeholder="Adres Bilgileri" onfocus="this.placeholder = 'Adres Bilgileri'"
+                                   value="@Model.Address" onblur="this.placeholder = 'Adres Bilgileri'" required class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <div class="form-group" id="default-select">
+                                <select class="form-control" name="AdvertTypeId">
+                                    <option>İlan Türü Seçiniz</option>
+                                    @foreach (AdvertType advertType in ViewBag.AdvertTypeList)
+                                    {
+                                        if (advertType.Id == Model.AdvertTypeId)
+                                        {
+                                            <option value="@advertType.Id" selected>@advertType.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@advertType.Id">@advertType.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <div class="form-group" id="default-select">
+                                <select class="form-control" name="HeatingId">
+                                    <option>Isınma Tipini Seçiniz</option>
+                                    @foreach (Heating heating in ViewBag.HeatingList)
+                                    {
+                                        if (heating.Id == Model.HeatingId)
+                                        {
+                                            <option value="@heating.Id" selected>@heating.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@heating.Id">@heating.Name</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ProvinceId"></label>
+                            <select class="form-control" id="ProvinceId" name="ProvinceId" asp-items='@(new SelectList(ViewBag.ProvinceList, "Id", "Name"))'>
+                                <option>-- İl Seçiniz -- </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="DistrictId" name="DistrictId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- İlçe Seçiniz -- </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="PlaceId" name="PlaceId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- Semt Seçiniz -- </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="NeighborhoodId" name="NeighborhoodId" asp-items='@(new SelectList(string.Empty, "Id", "Name"))'>
+                                <option>-- Mahalle Seçiniz -- </option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            @foreach (var item in Model.Photos)
+                            {
+                                <span>
+                                    <img name="Photos" src="\resimler\@item.FileName" style="height: 100px;" class="img-thumbnail" />
+
+                                </span>
+
+                            }
+                        </div>
+
+
+                        <button style="margin-top: 20px;" class="btn btn-primary" type="submit">İlan Düzenle</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+        $(function () {
+           
+        $("#ProvinceId").change(function() {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetDistrictById";
+            var ddlsource = "#ProvinceId";;
+
+            debugger;
+            $.getJSON(url,
+                { id: $(ddlsource).val() },
+                function(data) {
+                    var items = '';
+                    $("#DistrictId").empty();
+                    $.each(data,
+                        function(i, row) {
+                            items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                        });
+                    $("#DistrictId").html(items);
+                })
+        });
+        $("#DistrictId").change(function() {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetPlaceGetById";
+            var ddlsource = "#DistrictId";;
+            debugger;
+            $.getJSON(url,
+                { id: $(ddlsource).val() },
+                function(data) {
+                    var items = '';
+                    $("#PlaceId").empty();
+                    $.each(data,
+                        function(i, row) {
+                            items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                        });
+                    $("#PlaceId").html(items);
+                })
+        });
+        $("#PlaceId").change(function () {
+
+            var url = '@Url.Content("~/")' + "RealEstate/GetNeighborhoodById";
+            var ddlsource = "#PlaceId";
+            ;
+            debugger;
+            $.getJSON(url, { id: $(ddlsource).val() }, function(data) {
+                var items = '';
+                $("#NeighborhoodId").empty();
+                $.each(data,
+                    function(i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                $("#NeighborhoodId").html(items);
+            })
+        })
+    })
+</script>
+

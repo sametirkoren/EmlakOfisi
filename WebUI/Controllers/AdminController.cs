@@ -6,7 +6,9 @@ using Business.Abstract;
 using Core.Utilities.Security;
 using DataTransferObjects;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 using WebUI.Models;
 
 namespace WebUI.Controllers
@@ -19,8 +21,8 @@ namespace WebUI.Controllers
         private IAdvertTypeService _advertTypeService;
         private IHeatingService _heatingService;
         private IAdminService _adminService;
-
-        public AdminController(IAuthService authService, IHeatingService heatingService, IAdvertTypeService advertTypeService, IAdvertService advertService, IRealEstateService realEstateService, IAdminService adminService)
+      
+        public AdminController(IAuthService authService, IHeatingService heatingService, IAdvertTypeService advertTypeService, IAdvertService advertService, IRealEstateService realEstateService, IAdminService adminService, IHttpContextAccessor httpContextAccessor)
         {
             _authService = authService;
             _heatingService = heatingService;
@@ -28,12 +30,13 @@ namespace WebUI.Controllers
             _advertService = advertService;
             _realEstateService = realEstateService;
             _adminService = adminService;
+           
         }
 
 
         public IActionResult Index()
         {
-            ViewBag.AdvertListCount = _advertService.GetList().Count;
+            ViewBag.AdvertListCount = _advertService.GetAll().Count;
             ViewBag.AdvertTypeListCount = _advertTypeService.GetList().Count;
             ViewBag.RealEstateListCount = _realEstateService.GetList().Count;
             ViewBag.HeatingListCount = _heatingService.GetList().Count;
@@ -57,6 +60,7 @@ namespace WebUI.Controllers
             {
                 return View(adminToLogin);
             }
+            HttpContext.Session.SetObject("admin" , logingDto);
             return RedirectToAction("Index", "Admin");
         }
 
@@ -149,6 +153,14 @@ namespace WebUI.Controllers
             var adminDelete = _adminService.Delete(admin);
             TempData["DangerMessage"] = adminDelete.Message;
             return RedirectToAction("List", "Admin");
+        }
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("admin");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Admin");
         }
 
 

@@ -13,5 +13,6 @@ namespace WebUI.Models
     {
         public List<AdvertForListDto> Adverts { get;  set; }
         
+     
     }
 }

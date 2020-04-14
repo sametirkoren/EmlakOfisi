@@ -18,6 +18,10 @@ namespace Business.Abstract
 
         IResult Update(Advert advert);
 
-        List<AdvertForListDto> GetList();
+        Advert GetByPhoto(int advertId);
+
+        List<AdvertForListDto> GetList(int realEstateId);
+        AdvertForListDto Get(int advertId);
+        List<Advert> GetAll();
     }
 }

@@ -1,0 +1,71 @@
+﻿@using Entities.Concrete
+@model IEnumerable<DataTransferObjects.AdvertForListDto>
+@{
+    ViewData["Title"] = "AdvertList";
+    Layout = "~/Views/Shared/_RealEstateLayout.cshtml";
+}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>İlan Listesi</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.AdvertList > 0)
+{
+    <div class="section-top-border">
+        <h3 class="mb-30"></h3>
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+                <div class="table-head">
+                    <div class="serial">No</div>
+                    <div class="visit"></div>
+                    <div class="visit">İlan Başlık</div>
+                    <div class="visit">m²</div>
+                    <div class="visit">Oda Sayısı</div>
+                    <div class="visit">İlan Türü</div>
+                    <div class="visit">Isınma Tipi</div>
+                    <div class="visit">
+                        <a asp-action="AdvertList" asp-route-sortOrder="@ViewBag.PriceSortParam">Fiyat</a>
+                    </div>
+                    <div class="visit">İl</div>
+                    <div class="visit">İlçe</div>
+                    <div class="visit">Detay</div>
+
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="table-row">
+                        <div class="serial">@item.Id</div>
+                        <div class="visit"> <img style="height:100px" class="img-thumbnail" src="\resimler\@item.Photos.FirstOrDefault().FileName" alt="İlan"></div>
+                        <div class="visit">@item.Title</div>
+                        <div class="visit">@item.SquareMeter</div>
+                        <div class="visit">@item.RoomCount</div>
+                        <div class="visit">@item.AdvertType.Name</div>
+                        <div class="visit">@item.Heating.Name</div>
+                        <div class="visit">@item.Price</div>
+                        <div class="visit">@item.Province.Name</div>
+                        <div class="visit">@item.District.Name</div>
+                        <div class="visit">
+                            <a class="genric-btn info" href="/RealEstate/Details/@item.Id">İncele</a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <div style="margin-top: 20px;" class="text-center" >
+        <p style="font-size : 30px" class="primary">Henüz İlanınız Bulunmamaktadır.</p>
+    </div>
+}
+
+

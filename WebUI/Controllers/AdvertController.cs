@@ -38,73 +38,8 @@ namespace WebUI.Controllers
             _placeService = placeService;
         }
 
-        public IActionResult Index()
-        {
-            var model = new AdvertListViewModel
-            {
-                Adverts = _advertService.GetList()
-
-            };
-
-            return View(model.Adverts);
-
-        }
+        
       
       
-        public JsonResult GetDistrictById(int id)
-        {
-            var districtList = _districtService.GetDistrict(id);
-            return Json(new SelectList(districtList, "Id", "Name"));
-        }
-
-
-        public JsonResult GetPlaceGetById(int id)
-        {
-            var placeList = _placeService.GetPlace(id);
-            return Json(new SelectList(placeList, "Id", "Name"));
-        }
-
-        public JsonResult GetNeighborhoodById(int id)
-        {
-            var neighborHoodList = _neighborhoodService.GetNeighborhood(id);
-            return Json(new SelectList(neighborHoodList, "Id", "Name"));
-        }
-
-
-
-        public IActionResult Create()
-        {
-
-                ViewBag.ProvinceList = _provinceService.GetList();
-                ViewBag.HeatingList = _heatingService.GetList();
-                ViewBag.AdvertTypeList = _advertTypeService.GetList();
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Advert advert)
-        {
-            
-            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "resimler");
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-
-            foreach (var item in advert.Files)
-            {
-                using (var fileStream = new FileStream(Path.Combine(filePath, item.FileName), FileMode.Create))
-                {
-                    item.CopyTo(fileStream);
-                }
-
-                advert.Photos.Add(new Photo{FileName = item.FileName});
-            }
-
-            _advertService.Add(advert);
-            return RedirectToAction(nameof(Index));
-
-        }
     }
 }

@@ -1,0 +1,138 @@
+﻿@model DataTransferObjects.AdvertForListDto
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_RealEstateLayout.cshtml";
+}
+<style type="text/css">
+
+    .gallerycontainer {
+        position: relative;
+        /*Add a height attribute and set to largest image's height to prevent overlaying*/
+    }
+
+    .thumbnail img {
+        border: 1px solid white;
+        margin: 0 5px 5px 0;
+    }
+
+    .thumbnail:hover {
+        background-color: transparent;
+    }
+
+        .thumbnail:hover img {
+            border: 1px solid blue;
+        }
+
+    .thumbnail span { /*CSS for enlarged image*/
+        position: absolute;
+        background-color: lightyellow;
+        padding: 5px;
+        left: -1000px;
+        border: 1px dashed gray;
+        visibility: hidden;
+        color: black;
+        text-decoration: none;
+    }
+
+        .thumbnail span img { /*CSS for enlarged image*/
+            border-width: 0;
+            padding: 2px;
+            width: 500px;
+            height: 500px;
+        }
+
+    .thumbnail:hover span { /*CSS for enlarged image*/
+        visibility: visible;
+        top: 0;
+        left: 230px; /*position where enlarged image should offset horizontally */
+        z-index: 50;
+    }
+</style>
+
+<!-- bradcam_area  -->
+<div class="property_details_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-md-8 col-lg-6">
+                <div class="comfortable_apartment">
+
+                    
+                
+                    <h4  style="display: inline-block;margin-right:20px">@Model.Title</h4><span><a style="height: 35px;" href="/RealEstate/AdvertEdit/@Model.Id" class="genric-btn warning circle">Düzenle</a></span>
+                <p style="font-size: 17px;"> <img style="width: 30px;" src="~/Contents/img/svg_icon/location.svg" alt=""> @Model.Province.Name / @Model.District.Name / @Model.Place.Name / @Model.Neighborhood.Name</p>
+                <div class="quality_quantity d-flex">
+                    <div class="single_quantity">
+                        <img style="width: 50px; height: 50px; color: #fdae5c" src="~/Contents/img/svg_icon/color_box.svg" alt="">
+                        <span style="width: 131px">Büyüklük: @Model.SquareMeter m²</span>
+                    </div>
+                    <div class="single_quantity">
+                        <img style="width: 50px; height: 50px; color: #fdae5c" src="~/Contents/img/svg_icon/color_bed.svg" alt="">
+                        <span style="width: 131px">Oda Sayısı : @Model.RoomCount</span>
+                    </div>
+                    <div class="single_quantity">
+
+                        <img style="width: 50px; height: 50px; color: #fdae5c" src="~/Contents/img/svg_icon/hotel.svg" />
+                        <span style="width: 131px">Bina Yaşı : @Model.BuildAge</span>
+                    </div>
+                    <div class="single_quantity">
+                        <img style="width: 50px; height: 50px; color: #fdae5c" src="~/Contents/img/svg_icon/stairs.svg" />
+
+                        <span style="width: 131px">Bina Kat Sayısı : @Model.BuildFloor</span>
+                    </div>
+                    <div class="single_quantity">
+                        <img style="width: 50px; height: 50px; fill: #fdae5c" src="~/Contents/img/svg_icon/stairs.svg" />
+                        <span style="width: 131px">Kaçıncı Kat : @Model.Floor</span>
+                    </div>
+                    <div class="single_quantity">
+                        <img style="width: 50px; height: 50px; color: #fdae5c" src="~/Contents/img/svg_icon/radiator.svg" />
+                        <span style="width: 180px">Isınma Türü : @Model.Heating.Name</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-xl-6 col-md-4 col-lg-6">
+                <div class="prise_quantity">
+                    <h4>@Model.Price ₺</h4>
+                </div>
+                <div class="prise_quantity">
+                    
+                    <h4 style="color: green">İlan Türü : @Model.AdvertType.Name</h4>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- details  -->
+<div class="property_details">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="property_banner">
+                    <div class="property_banner_active owl-carousel">
+                        @foreach (var item in Model.Photos)
+                        {<div class="single_property">
+                            <img style="width: 100%; height: 500px; background-size: cover;" src="\resimler\@item.FileName" />
+                         </div>
+                            
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+                <div class="details_info">
+                    <h4>Detay Bilgiler</h4>
+                    <p>@Model.Description</p>
+                    <h4>Adres Bilgileri</h4>
+                    <p>@Model.Address</p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
